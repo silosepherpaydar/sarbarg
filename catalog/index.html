@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1080" />
+  <title>لیست قیمت ماه مهر — سیلو</title>
+  <style>
+    @font-face { font-family: Vazirmatn; src: url("fonts/Vazirmatn-Regular.ttf") format("truetype"); font-weight: 400; }
+    @font-face { font-family: Vazirmatn; src: url("fonts/Vazirmatn-Medium.ttf") format("truetype"); font-weight: 500; }
+    @font-face { font-family: Vazirmatn; src: url("fonts/Vazirmatn-SemiBold.ttf") format("truetype"); font-weight: 600; }
+    @font-face { font-family: Vazirmatn; src: url("fonts/Vazirmatn-Bold.ttf") format("truetype"); font-weight: 700; }
+    @font-face { font-family: Vazirmatn; src: url("fonts/Vazirmatn-ExtraBold.ttf") format("truetype"); font-weight: 800; }
+    @font-face { font-family: Vazirmatn; src: url("fonts/Vazirmatn-Black.ttf") format("truetype"); font-weight: 900; }
+
+    :root {
+      --ink: #383838;
+      --ink-deep: #2c2c2c;
+      --paper: #f4f1ec;
+      --paper-2: #fffdf9;
+      --orange: #ee4a24;
+      --muted: #6b6b6b;
+      --stripe: #f7efe8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 1080px;
+      background: var(--paper);
+      font-family: Vazirmatn, "Noto Naskh Arabic", Tahoma, sans-serif;
+      color: var(--ink-deep);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .poster {
+      width: 1080px;
+      background: var(--paper);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header {
+      position: relative;
+      background: var(--ink);
+      color: #fff;
+      padding: 28px 48px 70px;
+      overflow: hidden;
+    }
+
+    .leaf { position: absolute; opacity: 0.16; pointer-events: none; }
+    .leaf-r { top: -10px; left: -20px; width: 260px; }
+    .leaf-l { top: 8px; right: -36px; width: 280px; transform: scaleX(-1); }
+
+    .month {
+      position: absolute;
+      top: 28px;
+      right: 40px;
+      z-index: 3;
+      background: var(--orange);
+      color: #fff;
+      border-radius: 999px;
+      padding: 10px 22px 8px;
+      font-weight: 800;
+      font-size: 22px;
+      text-align: center;
+      line-height: 1.15;
+    }
+    .month small {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      opacity: 0.92;
+      margin-top: 2px;
+    }
+
+    .tag {
+      position: absolute;
+      top: 36px;
+      left: 36px;
+      z-index: 3;
+      color: #d2d2d2;
+      font-size: 13px;
+      font-weight: 600;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      letter-spacing: 1px;
+    }
+
+    .logo-wrap {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding-top: 8px;
+    }
+    .logo { height: 92px; }
+
+    .titles {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      margin-top: 10px;
+    }
+    .titles h1 {
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1;
+      color: #fff;
+    }
+    .titles h2 {
+      font-size: 44px;
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--orange);
+      margin-top: 4px;
+    }
+    .titles h3 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+      margin-top: 6px;
+    }
+    .rule {
+      width: 200px;
+      height: 3px;
+      margin: 12px auto 0;
+      background: var(--orange);
+      border-radius: 2px;
+    }
+
+    .wave {
+      position: absolute;
+      left: 0; right: 0; bottom: -1px;
+      width: 100%;
+      height: 48px;
+      display: block;
+    }
+
+    .body { padding: 22px 48px 20px; }
+
+    .card {
+      background: var(--paper-2);
+      border: 1px solid #eadfd6;
+      border-radius: 22px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 21px;
+      font-weight: 800;
+      padding: 11px 18px;
+    }
+    .section-title .bean { width: 16px; height: 22px; transform: rotate(-30deg); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-variant-numeric: tabular-nums;
+    }
+    th, td {
+      padding: 10px 8px;
+      text-align: center;
+      font-size: 18px;
+    }
+    th {
+      background: #f3e7df;
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 15px;
+      border-bottom: 1px solid #ead7cb;
+    }
+    td {
+      font-weight: 700;
+      color: #2a2a2a;
+      border-bottom: 1px solid #f0e6de;
+    }
+    td.prod, th.prod {
+      text-align: right;
+      padding-right: 22px;
+      font-weight: 800;
+      width: 22%;
+    }
+    tbody tr:nth-child(even) td { background: var(--stripe); }
+    tbody tr:nth-child(odd) td { background: #fff; }
+    tbody tr:last-child td { border-bottom: 0; }
+
+    .arabica th, .arabica td { font-size: 18px; padding: 8px 28px; }
+    .arabica th.prod, .arabica td.prod { width: 46%; }
+    .arabica th.price, .arabica td.price { width: 54%; }
+
+    .unit {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .note-main {
+      background: var(--orange);
+      color: #fff;
+      border-radius: 16px;
+      padding: 13px 22px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 19px;
+      font-weight: 800;
+      text-align: center;
+    }
+    .note-main .ico { width: 26px; height: 26px; flex: 0 0 auto; }
+    .note-main b {
+      font-size: 26px;
+      font-weight: 900;
+      padding: 0 5px;
+    }
+
+    .note-sub {
+      margin-top: 10px;
+      border: 1.5px solid var(--orange);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 9px 22px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 16px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--orange);
+      flex: 0 0 auto;
+    }
+
+    .footer-orange { height: 6px; background: var(--orange); }
+    .footer {
+      background: var(--ink);
+      color: #fff;
+      padding: 20px 48px 22px;
+    }
+    .footer h4 {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .footer .addr {
+      text-align: center;
+      font-size: 15px;
+      font-weight: 500;
+      color: #e8e8e8;
+      line-height: 1.75;
+    }
+    .phones {
+      display: flex;
+      justify-content: center;
+      gap: 56px;
+      margin-top: 10px;
+      text-align: center;
+    }
+    .phones .lbl {
+      font-size: 13px;
+      font-weight: 500;
+      color: #cfcfcf;
+      margin-bottom: 2px;
+    }
+    .phones .num {
+      direction: ltr;
+      unicode-bidi: isolate;
+      font-weight: 800;
+      color: #fff;
+      font-size: 18px;
+      letter-spacing: 0.6px;
+    }
+    .foot-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+    }
+    .social {
+      font-size: 14px;
+      color: #d0d0d0;
+      font-weight: 500;
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+    .social b { color: var(--orange); font-weight: 800; }
+    .slogan {
+      color: var(--orange);
+      font-weight: 800;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <article class="poster">
+    <header class="header">
+      <svg class="leaf leaf-r" viewBox="0 0 280 260" fill="none" aria-hidden="true">
+        <path d="M210 40c-28 18-70 78-46 150 42-18 86-70 70-140-8 12-18 20-24-10z" stroke="#fff" stroke-width="3"/>
+        <path d="M168 78c-18 22-22 70 2 118" stroke="#fff" stroke-width="2"/>
+        <circle cx="188" cy="58" r="10" stroke="#fff" stroke-width="2.5"/>
+        <circle cx="206" cy="72" r="9" stroke="#fff" stroke-width="2.5"/>
+        <circle cx="176" cy="74" r="8" stroke="#fff" stroke-width="2.5"/>
+        <path d="M70 30c32 8 86 48 70 150C92 160 28 96 70 30z" stroke="#fff" stroke-width="3"/>
+        <path d="M92 62c16 24 18 78-8 122" stroke="#fff" stroke-width="2"/>
+      </svg>
+      <svg class="leaf leaf-l" viewBox="0 0 280 260" fill="none" aria-hidden="true">
+        <path d="M210 40c-28 18-70 78-46 150 42-18 86-70 70-140-8 12-18 20-24-10z" stroke="#fff" stroke-width="3"/>
+        <path d="M168 78c-18 22-22 70 2 118" stroke="#fff" stroke-width="2"/>
+        <circle cx="188" cy="58" r="10" stroke="#fff" stroke-width="2.5"/>
+        <circle cx="206" cy="72" r="9" stroke="#fff" stroke-width="2.5"/>
+        <circle cx="176" cy="74" r="8" stroke="#fff" stroke-width="2.5"/>
+      </svg>
+
+      <div class="month">مهر ماه<small>کاتالوگ ماه</small></div>
+      <div class="tag">از ایده تا فنجان</div>
+
+      <div class="logo-wrap">
+        <img class="logo" src="img/silo-logo.png" alt="سیلو SILO COFFEE" />
+      </div>
+
+      <div class="titles">
+        <h1>لیست قیمت</h1>
+        <h2>دانه روست شده</h2>
+        <h3>روبوستا و عربیکا</h3>
+        <div class="rule"></div>
+      </div>
+
+      <svg class="wave" viewBox="0 0 1080 52" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 22 C 220 52, 420 0, 640 26 C 820 48, 960 8, 1080 28 L 1080 52 L 0 52 Z" fill="#f4f1ec"/>
+      </svg>
+    </header>
+
+    <div class="body">
+      <section class="card">
+        <div class="section-title">
+          <svg class="bean" viewBox="0 0 24 24" aria-hidden="true">
+            <ellipse cx="12" cy="12" rx="7" ry="10" fill="#ee4a24"/>
+            <path d="M12 4c-2.1 2.6-2.2 12.8 0 16" stroke="#383838" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          </svg>
+          دانه روست شده روبوستا
+          <svg class="bean" viewBox="0 0 24 24" aria-hidden="true">
+            <ellipse cx="12" cy="12" rx="7" ry="10" fill="#ee4a24"/>
+            <path d="M12 4c-2.1 2.6-2.2 12.8 0 16" stroke="#383838" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th class="prod">محصول</th>
+              <th>۱۰۰ کیلو به بالا</th>
+              <th>۴۰ تا ۸۰ کیلو</th>
+              <th>۲۰ کیلو</th>
+              <th>۵ و ۱۰ کیلو</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="prod">ویتنام</td><td>۱۷۸۰</td><td>۱۸۰۰</td><td>۱۸۲۰</td><td>۱۸۵۰</td></tr>
+            <tr><td class="prod">چری</td><td>۲۱۵۰</td><td>۲۱۷۰</td><td>۲۲۰۰</td><td>۲۲۵۰</td></tr>
+            <tr><td class="prod">پی‌بی</td><td>۲۰۱۰</td><td>۲۰۳۰</td><td>۲۰۵۰</td><td>۲۰۹۰</td></tr>
+            <tr><td class="prod">اوگاندا</td><td>۲۲۳۰</td><td>۲۲۵۰</td><td>۲۲۸۰</td><td>۲۳۲۰</td></tr>
+            <tr><td class="prod">اندونزی</td><td>۲۶۵۰</td><td>۲۶۸۰</td><td>۲۷۱۰</td><td>۲۷۴۰</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card arabica">
+        <div class="section-title">
+          <svg class="bean" viewBox="0 0 24 24" aria-hidden="true">
+            <ellipse cx="12" cy="12" rx="7" ry="10" fill="#ee4a24"/>
+            <path d="M12 4c-2.1 2.6-2.2 12.8 0 16" stroke="#383838" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          </svg>
+          دانه روست شده عربیکا
+          <svg class="bean" viewBox="0 0 24 24" aria-hidden="true">
+            <ellipse cx="12" cy="12" rx="7" ry="10" fill="#ee4a24"/>
+            <path d="M12 4c-2.1 2.6-2.2 12.8 0 16" stroke="#383838" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th class="prod">محصول</th>
+              <th class="price">قیمت <span class="unit">(هزار تومان / کیلو)</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="prod">کنیا</td><td class="price">۳۶۰۰</td></tr>
+            <tr><td class="prod">پانتیشن</td><td class="price">۳۶۰۰</td></tr>
+            <tr><td class="prod">تانزانیا</td><td class="price">۳۶۰۰</td></tr>
+            <tr><td class="prod">پرو</td><td class="price">۴۳۰۰</td></tr>
+            <tr><td class="prod">کلمبیا</td><td class="price">۴۵۰۰</td></tr>
+            <tr><td class="prod">نیکاراگوئه</td><td class="price">۴۲۰۰</td></tr>
+            <tr><td class="prod">برزیل</td><td class="price">۳۸۰۰</td></tr>
+            <tr><td class="prod">سوماترا</td><td class="price">۳۴۰۰</td></tr>
+            <tr><td class="prod">هندوراس</td><td class="price">۳۶۰۰</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="notes">
+        <div class="note-main">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="13" width="4.5" height="8" rx="1" fill="#fff"/>
+            <rect x="9.75" y="8" width="4.5" height="13" rx="1" fill="#fff"/>
+            <rect x="16.5" y="3" width="4.5" height="18" rx="1" fill="#fff"/>
+          </svg>
+          قیمت‌ها در روست دارک، کیلویی <b>۵۰</b> هزار افزایش پیدا می‌کند.
+        </div>
+        <div class="note-sub">
+          <span class="dot"></span>
+          قیمت‌ها در رنگ‌رست‌های مدیوم و مدیوم دارک تفاوتی ندارند.
+          <span class="dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-orange"></div>
+    <footer class="footer">
+      <h4>بازرگانی سیلو سپهر پایدار</h4>
+      <p class="addr">اصفهان، شهرک صنعتی خمینی‌شهر، ناحیه غذایی، خیابان فرعی هفتم</p>
+      <div class="phones">
+        <div>
+          <div class="lbl">مدیر فروش</div>
+          <div class="num">۰۹۳۶ ۵۵۰ ۴۵۹۰</div>
+        </div>
+        <div>
+          <div class="lbl">پخش</div>
+          <div class="num">۰۹۱۱ ۷۹۹ ۵۰۹۹</div>
+        </div>
+      </div>
+      <div class="foot-row">
+        <div class="slogan">از ایده تا فنجان</div>
+        <div class="social">instagram / telegram <b>silosepher</b> · silosepher.ir</div>
+      </div>
+    </footer>
+  </article>
+</body>
+</html>
