@@ -16,6 +16,8 @@
     :root {
       --ink: #383838;
       --ink-deep: #2c2c2c;
+      --header: #5a534e;
+      --header-2: #463f3b;
       --paper: #f4f1ec;
       --paper-2: #fffdf9;
       --orange: #ee4a24;
@@ -48,20 +50,48 @@
 
     .header {
       position: relative;
-      background: var(--ink);
+      background: linear-gradient(165deg, #6b5d54 0%, #564940 52%, #453c38 100%);
       color: #fff;
-      padding: 12px 40px 34px;
+      padding: 14px 40px 32px;
       overflow: hidden;
       flex: 0 0 auto;
     }
+    .header-accent {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 7px;
+      background: var(--orange);
+      z-index: 4;
+    }
+    .header-mark {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .header-mark-main {
+      height: 200px;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.16;
+      filter: brightness(1.2);
+    }
+    .header-mark-side {
+      height: 150px;
+      top: 18px;
+      opacity: 0.08;
+      filter: brightness(1.2);
+    }
+    .header-mark-side.l { left: -48px; }
+    .header-mark-side.r { right: -44px; }
 
-    .leaf { position: absolute; opacity: 0.16; pointer-events: none; }
-    .leaf-r { top: -10px; left: -20px; width: 260px; }
-    .leaf-l { top: 8px; right: -36px; width: 280px; transform: scaleX(-1); }
+    .leaf { position: absolute; opacity: 0.12; pointer-events: none; z-index: 1; }
+    .leaf-r { top: -6px; left: -18px; width: 240px; }
+    .leaf-l { top: 10px; right: -30px; width: 250px; transform: scaleX(-1); }
 
     .month {
       position: absolute;
-      top: 16px;
+      top: 18px;
       right: 32px;
       z-index: 3;
       background: var(--orange);
@@ -86,7 +116,7 @@
       top: 22px;
       left: 28px;
       z-index: 3;
-      color: #d2d2d2;
+      color: #e8d8d0;
       font-size: 13px;
       font-weight: 600;
       writing-mode: vertical-rl;
@@ -98,15 +128,15 @@
       position: relative;
       z-index: 2;
       text-align: center;
-      padding-top: 2px;
+      padding-top: 8px;
     }
-    .logo { height: 58px; }
+    .logo { height: 56px; }
 
     .titles {
       text-align: center;
       position: relative;
       z-index: 2;
-      margin-top: 4px;
+      margin-top: 2px;
     }
     .titles h1 {
       font-size: 44px;
@@ -122,9 +152,9 @@
       margin-top: 2px;
     }
     .titles h3 {
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 800;
-      color: #fff;
+      color: #f3ece6;
       margin-top: 3px;
     }
     .rule {
@@ -139,14 +169,15 @@
       position: absolute;
       left: 0; right: 0; bottom: -1px;
       width: 100%;
-      height: 30px;
+      height: 28px;
       display: block;
+      z-index: 2;
     }
 
     .body {
       position: relative;
       flex: 1 1 auto;
-      padding: 8px 36px 6px;
+      padding: 8px 32px 6px;
       background-color: var(--paper);
       background-image: url("img/silo-watermark.png");
       background-repeat: repeat;
@@ -171,31 +202,58 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
       background: var(--ink);
       color: #fff;
       font-size: 20px;
       font-weight: 800;
       padding: 7px 14px;
+      min-height: 38px;
     }
-    .section-title .bean { width: 16px; height: 22px; transform: rotate(-30deg); }
+    .section-title span {
+      display: block;
+      width: 340px;
+      text-align: center;
+      flex: 0 0 340px;
+      letter-spacing: 0.2px;
+    }
+    .section-title .bean {
+      width: 16px;
+      height: 22px;
+      transform: rotate(-30deg);
+      flex: 0 0 auto;
+    }
 
     table {
       width: 100%;
       border-collapse: collapse;
+      table-layout: fixed;
       font-variant-numeric: tabular-nums;
     }
     th, td {
-      padding: 5px 8px;
+      padding: 5px 6px;
       text-align: center;
-      font-size: 18px;
+      font-size: 16px;
     }
     th {
       background: rgba(243, 231, 223, 0.78);
       color: var(--ink);
       font-weight: 800;
-      font-size: 16px;
+      font-size: 13px;
+      line-height: 1.2;
       border-bottom: 1px solid #ead7cb;
+    }
+    th .rng {
+      display: inline-block;
+      unicode-bidi: isolate;
+      direction: rtl;
+    }
+    th small {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 1px;
     }
     td {
       font-weight: 700;
@@ -204,7 +262,7 @@
     }
     td.price {
       font-weight: 900;
-      font-size: 23px;
+      font-size: 20px;
       line-height: 1;
       letter-spacing: 0;
       color: #111;
@@ -216,16 +274,17 @@
       font-variation-settings: "wght" 900;
     }
     td.price.base {
-      font-size: 24px;
+      font-size: 21px;
       color: #0d0d0d;
     }
     td.prod, th.prod {
       text-align: right;
-      padding-right: 20px;
+      padding-right: 16px;
       font-weight: 800;
-      font-size: 22px;
-      width: 26%;
+      font-size: 20px;
+      width: 24%;
     }
+    th.prod { font-size: 14px; }
     td.prod .mix {
       display: block;
       font-size: 12px;
@@ -234,18 +293,10 @@
       margin-top: 1px;
       letter-spacing: 0;
     }
-    .blends td.prod, .blends th.prod { width: 38%; }
+    .blends td.prod, .blends th.prod { width: 30%; }
     tbody tr:nth-child(even) td { background: rgba(247, 239, 232, 0.58); }
     tbody tr:nth-child(odd) td { background: rgba(255, 255, 255, 0.52); }
     tbody tr:last-child td { border-bottom: 0; }
-
-    .unit {
-      display: block;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--muted);
-      margin-top: 1px;
-    }
 
     .notes { margin-top: auto; flex: 0 0 auto; }
 
@@ -258,13 +309,13 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 800;
       text-align: center;
     }
     .note-main .ico { width: 20px; height: 20px; flex: 0 0 auto; }
     .note-main b {
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 900;
       padding: 0 4px;
       font-variant-numeric: tabular-nums;
@@ -276,21 +327,21 @@
       border: 1.5px solid var(--orange);
       color: var(--ink);
       border-radius: 999px;
-      padding: 5px 16px;
+      padding: 5px 14px;
       text-align: center;
       font-weight: 700;
-      font-size: 15px;
+      font-size: 14px;
       background: rgba(255, 255, 255, 0.78);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
     }
     .note-sub b {
       font-weight: 900;
-      font-size: 17px;
+      font-size: 16px;
       font-variation-settings: "wght" 900;
-      padding: 0 3px;
+      padding: 0 2px;
     }
     .dot {
       width: 9px; height: 9px; border-radius: 50%;
@@ -302,7 +353,7 @@
     .footer {
       background: var(--ink);
       color: #fff;
-      padding: 10px 36px 11px;
+      padding: 9px 36px 10px;
       flex: 0 0 auto;
     }
     .footer h4 {
@@ -316,7 +367,7 @@
       font-size: 13px;
       font-weight: 500;
       color: #e8e8e8;
-      line-height: 1.55;
+      line-height: 1.5;
     }
     .footer .addrs b {
       color: var(--orange);
@@ -370,6 +421,11 @@
 <body>
   <article class="poster">
     <header class="header">
+      <div class="header-accent"></div>
+      <img class="header-mark header-mark-main" src="img/silo-logo.png" alt="" />
+      <img class="header-mark header-mark-side l" src="img/silo-logo.png" alt="" />
+      <img class="header-mark header-mark-side r" src="img/silo-logo.png" alt="" />
+
       <svg class="leaf leaf-r" viewBox="0 0 280 260" fill="none" aria-hidden="true">
         <path d="M210 40c-28 18-70 78-46 150 42-18 86-70 70-140-8 12-18 20-24-10z" stroke="#fff" stroke-width="3"/>
         <path d="M168 78c-18 22-22 70 2 118" stroke="#fff" stroke-width="2"/>
@@ -397,7 +453,7 @@
       <div class="titles">
         <h1>لیست قیمت</h1>
         <h2>دانه روست شده</h2>
-        <h3>روبوستا، بلند و عربیکا</h3>
+        <h3>بلند، تک‌خاستگاه و عربیکا</h3>
         <div class="rule"></div>
       </div>
 
@@ -407,42 +463,13 @@
     </header>
 
     <div class="body">
-      <section class="card">
-        <div class="section-title">
-          <svg class="bean" viewBox="0 0 24 24" aria-hidden="true">
-            <ellipse cx="12" cy="12" rx="7" ry="10" fill="#ee4a24"/>
-            <path d="M12 4c-2.1 2.6-2.2 12.8 0 16" stroke="#383838" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-          </svg>
-          دانه روست شده روبوستا
-          <svg class="bean" viewBox="0 0 24 24" aria-hidden="true">
-            <ellipse cx="12" cy="12" rx="7" ry="10" fill="#ee4a24"/>
-            <path d="M12 4c-2.1 2.6-2.2 12.8 0 16" stroke="#383838" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th class="prod">محصول</th>
-              <th>۰ تا ۳۰ کیلو</th>
-              <th>۳۰ تا ۱۰۰ کیلو</th>
-              <th>۱۰۰ کیلو به بالا</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="prod">ویتنام</td><td class="price base">۱,۹۷۰</td><td class="price">۱,۹۲۰</td><td class="price">۱,۸۷۰</td></tr>
-            <tr><td class="prod">چری</td><td class="price base">۲,۶۷۰</td><td class="price">۲,۶۲۰</td><td class="price">۲,۵۷۰</td></tr>
-            <tr><td class="prod">پی‌بی</td><td class="price base">۲,۴۸۰</td><td class="price">۲,۴۳۰</td><td class="price">۲,۳۸۰</td></tr>
-          </tbody>
-        </table>
-      </section>
-
       <section class="card blends">
         <div class="section-title">
           <svg class="bean" viewBox="0 0 24 24" aria-hidden="true">
             <ellipse cx="12" cy="12" rx="7" ry="10" fill="#ee4a24"/>
             <path d="M12 4c-2.1 2.6-2.2 12.8 0 16" stroke="#383838" stroke-width="1.6" fill="none" stroke-linecap="round"/>
           </svg>
-          بلندهای ترکیبی سیلو
+          <span>بلندهای ترکیبی سیلو</span>
           <svg class="bean" viewBox="0 0 24 24" aria-hidden="true">
             <ellipse cx="12" cy="12" rx="7" ry="10" fill="#ee4a24"/>
             <path d="M12 4c-2.1 2.6-2.2 12.8 0 16" stroke="#383838" stroke-width="1.6" fill="none" stroke-linecap="round"/>
@@ -452,28 +479,60 @@
           <thead>
             <tr>
               <th class="prod">محصول</th>
-              <th>۰ تا ۳۰ کیلو</th>
-              <th>۳۰ تا ۱۰۰ کیلو</th>
-              <th>۱۰۰ کیلو به بالا</th>
+              <th><span class="rng">۵ تا ۱۰</span><small>کیلو</small></th>
+              <th><span class="rng">۱۰ تا ۵۰</span><small>کیلو</small></th>
+              <th><span class="rng">۵۰ تا ۱۰۰</span><small>کیلو</small></th>
+              <th><span class="rng">۱۰۰ به بالا</span><small>کیلو</small></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="prod">بلند سوپر نوا<span class="mix">۱۰۰٪ روبوستا · ویتنام / اوگاندا</span></td>
-              <td class="price base">۲,۵۶۰</td><td class="price">۲,۵۱۰</td><td class="price">۲,۴۶۰</td>
+              <td class="price base">۲,۵۶۰</td><td class="price">۲,۵۱۰</td><td class="price">۲,۴۶۰</td><td class="price">۲,۴۱۰</td>
             </tr>
             <tr>
               <td class="prod">بلند سوماترا<span class="mix">اندونزی</span></td>
-              <td class="price base">۲,۸۲۰</td><td class="price">۲,۷۷۰</td><td class="price">۲,۷۲۰</td>
+              <td class="price base">۲,۸۲۰</td><td class="price">۲,۷۷۰</td><td class="price">۲,۷۲۰</td><td class="price">۲,۶۷۰</td>
             </tr>
             <tr>
               <td class="prod">بلند افلاطون<span class="mix">۲۰٪ اندونزی · ۸۰٪ کلمبیا</span></td>
-              <td class="price base">۲,۹۸۰</td><td class="price">۲,۹۳۰</td><td class="price">۲,۸۸۰</td>
+              <td class="price base">۲,۹۸۰</td><td class="price">۲,۹۳۰</td><td class="price">۲,۸۸۰</td><td class="price">۲,۸۳۰</td>
             </tr>
             <tr>
               <td class="prod">بلند هارمونی<span class="mix">۳۰٪ اندونزی · ۷۰٪ کلمبیا</span></td>
-              <td class="price base">۳,۲۵۰</td><td class="price">۳,۲۰۰</td><td class="price">۳,۱۵۰</td>
+              <td class="price base">۳,۲۵۰</td><td class="price">۳,۲۰۰</td><td class="price">۳,۱۵۰</td><td class="price">۳,۱۰۰</td>
             </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card origins">
+        <div class="section-title">
+          <svg class="bean" viewBox="0 0 24 24" aria-hidden="true">
+            <ellipse cx="12" cy="12" rx="7" ry="10" fill="#ee4a24"/>
+            <path d="M12 4c-2.1 2.6-2.2 12.8 0 16" stroke="#383838" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          </svg>
+          <span>دانه‌های تک‌خاستگاه</span>
+          <svg class="bean" viewBox="0 0 24 24" aria-hidden="true">
+            <ellipse cx="12" cy="12" rx="7" ry="10" fill="#ee4a24"/>
+            <path d="M12 4c-2.1 2.6-2.2 12.8 0 16" stroke="#383838" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th class="prod">محصول</th>
+              <th><span class="rng">۵ تا ۱۰</span><small>کیلو</small></th>
+              <th><span class="rng">۱۰ تا ۵۰</span><small>کیلو</small></th>
+              <th><span class="rng">۵۰ تا ۱۰۰</span><small>کیلو</small></th>
+              <th><span class="rng">۱۰۰ به بالا</span><small>کیلو</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="prod">ویتنام</td><td class="price base">۱,۹۷۰</td><td class="price">۱,۹۲۰</td><td class="price">۱,۸۷۰</td><td class="price">۱,۸۲۰</td></tr>
+            <tr><td class="prod">چری</td><td class="price base">۲,۶۷۰</td><td class="price">۲,۶۲۰</td><td class="price">۲,۵۷۰</td><td class="price">۲,۵۲۰</td></tr>
+            <tr><td class="prod">پی‌بی</td><td class="price base">۲,۴۸۰</td><td class="price">۲,۴۳۰</td><td class="price">۲,۳۸۰</td><td class="price">۲,۳۳۰</td></tr>
+            <tr><td class="prod">اندونزی</td><td class="price base">۲,۸۲۰</td><td class="price">۲,۷۷۰</td><td class="price">۲,۷۲۰</td><td class="price">۲,۶۷۰</td></tr>
           </tbody>
         </table>
       </section>
@@ -484,7 +543,7 @@
             <ellipse cx="12" cy="12" rx="7" ry="10" fill="#ee4a24"/>
             <path d="M12 4c-2.1 2.6-2.2 12.8 0 16" stroke="#383838" stroke-width="1.6" fill="none" stroke-linecap="round"/>
           </svg>
-          دانه روست شده عربیکا
+          <span>دانه روست شده عربیکا</span>
           <svg class="bean" viewBox="0 0 24 24" aria-hidden="true">
             <ellipse cx="12" cy="12" rx="7" ry="10" fill="#ee4a24"/>
             <path d="M12 4c-2.1 2.6-2.2 12.8 0 16" stroke="#383838" stroke-width="1.6" fill="none" stroke-linecap="round"/>
@@ -494,18 +553,19 @@
           <thead>
             <tr>
               <th class="prod">محصول</th>
-              <th>۰ تا ۳۰ کیلو</th>
-              <th>۳۰ تا ۱۰۰ کیلو</th>
-              <th>۱۰۰ کیلو به بالا</th>
+              <th><span class="rng">۵ تا ۱۰</span><small>کیلو</small></th>
+              <th><span class="rng">۱۰ تا ۵۰</span><small>کیلو</small></th>
+              <th><span class="rng">۵۰ تا ۱۰۰</span><small>کیلو</small></th>
+              <th><span class="rng">۱۰۰ به بالا</span><small>کیلو</small></th>
             </tr>
           </thead>
           <tbody>
-            <tr><td class="prod">کنیا</td><td class="price base">۳,۸۰۰</td><td class="price">۳,۷۵۰</td><td class="price">۳,۷۰۰</td></tr>
-            <tr><td class="prod">تانزانیا</td><td class="price base">۳,۸۰۰</td><td class="price">۳,۷۵۰</td><td class="price">۳,۷۰۰</td></tr>
-            <tr><td class="prod">پرو</td><td class="price base">۴,۵۰۰</td><td class="price">۴,۴۵۰</td><td class="price">۴,۴۰۰</td></tr>
-            <tr><td class="prod">کلمبیا</td><td class="price base">۴,۷۰۰</td><td class="price">۴,۶۵۰</td><td class="price">۴,۶۰۰</td></tr>
-            <tr><td class="prod">نیکاراگوئه</td><td class="price base">۴,۴۰۰</td><td class="price">۴,۳۵۰</td><td class="price">۴,۳۰۰</td></tr>
-            <tr><td class="prod">برزیل</td><td class="price base">۴,۰۰۰</td><td class="price">۳,۹۵۰</td><td class="price">۳,۹۰۰</td></tr>
+            <tr><td class="prod">کنیا</td><td class="price base">۳,۸۰۰</td><td class="price">۳,۷۵۰</td><td class="price">۳,۷۰۰</td><td class="price">۳,۶۵۰</td></tr>
+            <tr><td class="prod">تانزانیا</td><td class="price base">۳,۸۰۰</td><td class="price">۳,۷۵۰</td><td class="price">۳,۷۰۰</td><td class="price">۳,۶۵۰</td></tr>
+            <tr><td class="prod">پرو</td><td class="price base">۴,۵۰۰</td><td class="price">۴,۴۵۰</td><td class="price">۴,۴۰۰</td><td class="price">۴,۳۵۰</td></tr>
+            <tr><td class="prod">کلمبیا</td><td class="price base">۵,۴۰۰</td><td class="price">۵,۳۵۰</td><td class="price">۵,۳۰۰</td><td class="price">۵,۲۵۰</td></tr>
+            <tr><td class="prod">نیکاراگوئه</td><td class="price base">۴,۴۰۰</td><td class="price">۴,۳۵۰</td><td class="price">۴,۳۰۰</td><td class="price">۴,۲۵۰</td></tr>
+            <tr><td class="prod">برزیل</td><td class="price base">۴,۰۰۰</td><td class="price">۳,۹۵۰</td><td class="price">۳,۹۰۰</td><td class="price">۳,۸۵۰</td></tr>
           </tbody>
         </table>
       </section>
@@ -521,7 +581,7 @@
         </div>
         <div class="note-sub">
           <span class="dot"></span>
-          در هر پله وزنی بالاتر، کیلویی <b>۵۰</b> هزار تومان از قیمت کم می‌شود.
+          تخفیف حجمی از ده تا پنجاه، کیلویی <b>۵۰</b> هزار · از پنجاه تا صد، کیلویی <b>۱۰۰</b> هزار · از صد به بالا، کیلویی <b>۱۵۰</b> هزار تومان
           <span class="dot"></span>
         </div>
         <div class="note-sub">
