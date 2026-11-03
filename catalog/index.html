@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=1080" />
   <title>لیست قیمت ماه مهر — سیلو</title>
   <style>
-    @font-face { font-family: Vazirmatn; src: url("fonts/Vazirmatn-Regular.ttf") format("truetype"); font-weight: 400; }
-    @font-face { font-family: Vazirmatn; src: url("fonts/Vazirmatn-Medium.ttf") format("truetype"); font-weight: 500; }
-    @font-face { font-family: Vazirmatn; src: url("fonts/Vazirmatn-SemiBold.ttf") format("truetype"); font-weight: 600; }
-    @font-face { font-family: Vazirmatn; src: url("fonts/Vazirmatn-Bold.ttf") format("truetype"); font-weight: 700; }
-    @font-face { font-family: Vazirmatn; src: url("fonts/Vazirmatn-ExtraBold.ttf") format("truetype"); font-weight: 800; }
-    @font-face { font-family: Vazirmatn; src: url("fonts/Vazirmatn-Black.ttf") format("truetype"); font-weight: 900; }
+    @font-face {
+      font-family: Estedad;
+      src: url("fonts/Estedad-VF.ttf") format("truetype");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
 
     :root {
       --ink: #383838;
@@ -27,7 +28,7 @@
     html, body {
       width: 1080px;
       background: var(--paper);
-      font-family: Vazirmatn, "Noto Naskh Arabic", Tahoma, sans-serif;
+      font-family: Estedad, "Noto Naskh Arabic", Tahoma, sans-serif;
       color: var(--ink-deep);
       -webkit-font-smoothing: antialiased;
     }
@@ -101,21 +102,21 @@
       margin-top: 10px;
     }
     .titles h1 {
-      font-size: 56px;
+      font-size: 62px;
       font-weight: 900;
       line-height: 1;
       color: #fff;
     }
     .titles h2 {
-      font-size: 44px;
-      font-weight: 900;
+      font-size: 48px;
+      font-weight: 800;
       line-height: 1.15;
       color: var(--orange);
       margin-top: 4px;
     }
     .titles h3 {
-      font-size: 26px;
-      font-weight: 800;
+      font-size: 28px;
+      font-weight: 700;
       color: #fff;
       margin-top: 6px;
     }
@@ -152,9 +153,9 @@
       gap: 12px;
       background: var(--ink);
       color: #fff;
-      font-size: 21px;
+      font-size: 24px;
       font-weight: 800;
-      padding: 11px 18px;
+      padding: 12px 18px;
     }
     .section-title .bean { width: 16px; height: 22px; transform: rotate(-30deg); }
 
@@ -164,15 +165,15 @@
       font-variant-numeric: tabular-nums;
     }
     th, td {
-      padding: 10px 8px;
+      padding: 11px 8px;
       text-align: center;
-      font-size: 18px;
+      font-size: 22px;
     }
     th {
       background: #f3e7df;
       color: var(--ink);
       font-weight: 800;
-      font-size: 15px;
+      font-size: 17px;
       border-bottom: 1px solid #ead7cb;
     }
     td {
@@ -182,17 +183,40 @@
     }
     td.prod, th.prod {
       text-align: right;
-      padding-right: 22px;
+      padding-right: 20px;
       font-weight: 800;
-      width: 22%;
+      font-size: 24px;
+      width: 20%;
     }
     tbody tr:nth-child(even) td { background: var(--stripe); }
     tbody tr:nth-child(odd) td { background: #fff; }
     tbody tr:last-child td { border-bottom: 0; }
 
-    .arabica th, .arabica td { font-size: 18px; padding: 8px 28px; }
-    .arabica th.prod, .arabica td.prod { width: 46%; }
-    .arabica th.price, .arabica td.price { width: 54%; }
+    .ara-head, .ara-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto 1fr;
+      column-gap: 36px;
+      align-items: center;
+    }
+    .ara-head {
+      background: #f3e7df;
+      padding: 10px 0 8px;
+      border-bottom: 1px solid #ead7cb;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .ara-row {
+      padding: 8px 0;
+      font-size: 27px;
+      font-weight: 800;
+      border-bottom: 1px solid #f0e6de;
+    }
+    .ara-row:nth-child(even) { background: #fff; }
+    .ara-row:nth-child(odd) { background: var(--stripe); }
+    .ara-row:last-child { border-bottom: 0; }
+    .ara-head .prod, .ara-row .prod { grid-column: 2; text-align: right; min-width: 170px; }
+    .ara-head .price, .ara-row .price { grid-column: 3; text-align: center; min-width: 120px; }
+    .ara-row .prod, .ara-row .price { font-size: 27px; font-weight: 800; }
 
     .unit {
       display: block;
@@ -211,7 +235,7 @@
       align-items: center;
       justify-content: center;
       gap: 12px;
-      font-size: 19px;
+      font-size: 21px;
       font-weight: 800;
       text-align: center;
     }
@@ -388,25 +412,19 @@
             <path d="M12 4c-2.1 2.6-2.2 12.8 0 16" stroke="#383838" stroke-width="1.6" fill="none" stroke-linecap="round"/>
           </svg>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th class="prod">محصول</th>
-              <th class="price">قیمت <span class="unit">(هزار تومان / کیلو)</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="prod">کنیا</td><td class="price">۳۶۰۰</td></tr>
-            <tr><td class="prod">پانتیشن</td><td class="price">۳۶۰۰</td></tr>
-            <tr><td class="prod">تانزانیا</td><td class="price">۳۶۰۰</td></tr>
-            <tr><td class="prod">پرو</td><td class="price">۴۳۰۰</td></tr>
-            <tr><td class="prod">کلمبیا</td><td class="price">۴۵۰۰</td></tr>
-            <tr><td class="prod">نیکاراگوئه</td><td class="price">۴۲۰۰</td></tr>
-            <tr><td class="prod">برزیل</td><td class="price">۳۸۰۰</td></tr>
-            <tr><td class="prod">سوماترا</td><td class="price">۳۴۰۰</td></tr>
-            <tr><td class="prod">هندوراس</td><td class="price">۳۶۰۰</td></tr>
-          </tbody>
-        </table>
+        <div class="ara-head">
+          <span class="prod">محصول</span>
+          <span class="price">قیمت <span class="unit">(هزار تومان / کیلو)</span></span>
+        </div>
+        <div class="ara-row"><span class="prod">کنیا</span><span class="price">۳۸۰۰</span></div>
+        <div class="ara-row"><span class="prod">پانتیشن</span><span class="price">۳۸۰۰</span></div>
+        <div class="ara-row"><span class="prod">تانزانیا</span><span class="price">۳۸۰۰</span></div>
+        <div class="ara-row"><span class="prod">پرو</span><span class="price">۴۵۰۰</span></div>
+        <div class="ara-row"><span class="prod">کلمبیا</span><span class="price">۴۷۰۰</span></div>
+        <div class="ara-row"><span class="prod">نیکاراگوئه</span><span class="price">۴۴۰۰</span></div>
+        <div class="ara-row"><span class="prod">برزیل</span><span class="price">۴۰۰۰</span></div>
+        <div class="ara-row"><span class="prod">سوماترا</span><span class="price">۳۶۰۰</span></div>
+        <div class="ara-row"><span class="prod">هندوراس</span><span class="price">۳۸۰۰</span></div>
       </section>
 
       <div class="notes">

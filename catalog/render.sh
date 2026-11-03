@@ -9,7 +9,7 @@ google-chrome-stable \
   --allow-file-access-from-files \
   --hide-scrollbars \
   --force-device-scale-factor=2 \
-  --window-size=1080,1800 \
+  --window-size=1080,2200 \
   --virtual-time-budget=8000 \
   --screenshot="${RAW}" \
   "file://$(pwd)/index.html"
