@@ -2,6 +2,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 RAW="/tmp/silo-catalog-raw.png"
+# A4 portrait at 1080×1528 CSS px, captured at 2x
 google-chrome-stable \
   --headless=new \
   --disable-gpu \
@@ -9,7 +10,7 @@ google-chrome-stable \
   --allow-file-access-from-files \
   --hide-scrollbars \
   --force-device-scale-factor=2 \
-  --window-size=1080,2400 \
+  --window-size=1080,1528 \
   --virtual-time-budget=8000 \
   --screenshot="${RAW}" \
   "file://$(pwd)/index.html"
@@ -17,31 +18,15 @@ google-chrome-stable \
 python3 - <<'PY'
 from PIL import Image
 im = Image.open("/tmp/silo-catalog-raw.png").convert("RGB")
+# Exact A4 capture; trim only if chrome added a sliver
 w, h = im.size
-px = im.load()
-
-def is_trailing(y):
-    # trailing empty paper under the dark footer
-    papers = 0
-    darks = 0
-    n = 0
-    for x in range(0, w, 8):
-        r, g, b = px[x, y]
-        n += 1
-        if r > 228 and g > 222 and b > 210:
-            papers += 1
-        if r < 80 and g < 80 and b < 80:
-            darks += 1
-    return papers > n * 0.92 and darks < n * 0.05
-
-maxy = h - 1
-while maxy > 0 and is_trailing(maxy):
-    maxy -= 1
-
-crop = im.crop((0, 0, w, maxy + 1))
-crop.save("silo-price-list-mehr@2x.png", optimize=True)
-send = crop.resize((1080, round(crop.size[1] * 1080 / crop.size[0])), Image.Resampling.LANCZOS)
+im.save("silo-price-list-aban@2x.png", optimize=True)
+send = im.resize((1080, round(h * 1080 / w)), Image.Resampling.LANCZOS)
+send.save("silo-price-list-aban.png", optimize=True)
+# keep previous filename as alias for the sendable A4 sheet
 send.save("silo-price-list-mehr.png", optimize=True)
-print("2x", crop.size)
+im.save("silo-price-list-mehr@2x.png", optimize=True)
+print("2x", im.size)
 print("1x", send.size)
+print("ratio", round(send.size[1] / send.size[0], 3), "A4=", round(297/210, 3))
 PY
